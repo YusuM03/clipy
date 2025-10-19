@@ -32,3 +32,4 @@ export async function POST(req: NextRequest) {
   await insertBookmark(normalized);
 
   return new Response(null, { status: 204 });
+}
