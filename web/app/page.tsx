@@ -12,8 +12,8 @@ export default async function Page() {
 
       <ul className="space-y-4">
         {rows.map((row) => (
-          <li key={row.id} className="rounded-2xl border border-zinc-700 p-4">
-            {/* ← ここがポイント：タイトルがあればタイトル、無ければURLをそのまま表示 */}
+          <li key={row.id} className="rounded-2xl border border-zinc-700 p-4 space-y-1">
+            {/* タイトルがあればタイトル、なければURLをそのままリンク表示 */}
             <a
               href={row.url}
               target="_blank"
@@ -23,11 +23,11 @@ export default async function Page() {
               {row.title ?? row.url}
             </a>
 
-            {/* メモ（note）があれば表示 */}
-            {row.note && <p className="mt-2 text-lg">{row.note}</p>}
+            {/* メモ */}
+            {row.note && <p className="text-lg">{row.note}</p>}
 
             {/* メタ情報 */}
-            <p className="mt-1 text-sm text-zinc-400">
+            <p className="text-sm text-zinc-400">
               {new Date(row.created_at).toLocaleString()} ・ {row.source ?? 'unknown'}
             </p>
           </li>
