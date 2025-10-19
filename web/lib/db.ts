@@ -1,4 +1,3 @@
-// web/lib/db.ts
 import { sql } from '@vercel/postgres';
 
 export type Bookmark = {
@@ -10,7 +9,7 @@ export type Bookmark = {
   created_at: string; // or Date
 };
 
-/** 保存用：/api/share から呼ばれる */
+// 追加保存
 export async function insertBookmark(input: {
   url: string;
   title?: string | null;
@@ -23,7 +22,7 @@ export async function insertBookmark(input: {
   `;
 }
 
-/** 一覧取得：トップページから呼ばれる */
+// 一覧取得（必ず url を SELECT）
 export async function listBookmarks(limit = 100): Promise<Bookmark[]> {
   const { rows } = await sql<Bookmark>`
     SELECT id, url, title, note, source, created_at

@@ -1,4 +1,3 @@
-// web/app/page.tsx
 import { listBookmarks } from '@/lib/db';
 
 export const dynamic = 'force-dynamic';
@@ -13,7 +12,7 @@ export default async function Page() {
       <ul className="space-y-4">
         {rows.map((row) => (
           <li key={row.id} className="rounded-2xl border border-zinc-700 p-4 space-y-1">
-            {/* タイトルがあればタイトル、なければURLをそのままリンク表示 */}
+            {/* ★常にリンクを描画。テキストは title が無ければ url */}
             <a
               href={row.url}
               target="_blank"
@@ -23,10 +22,8 @@ export default async function Page() {
               {row.title ?? row.url}
             </a>
 
-            {/* メモ */}
             {row.note && <p className="text-lg">{row.note}</p>}
 
-            {/* メタ情報 */}
             <p className="text-sm text-zinc-400">
               {new Date(row.created_at).toLocaleString()} ・ {row.source ?? 'unknown'}
             </p>
