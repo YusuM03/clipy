@@ -22,13 +22,13 @@ export async function POST(req: NextRequest) {
   const parsed = Body.safeParse(await req.json());
   if (!parsed.success) return new Response('Bad Request', { status: 400 });
   const b = parsed.data;
-
-  await insertBookmark({
+  const normalized = {
     url: b.url,
-    title: b.title ?? null,
-    note: b.text ?? null,
-    source: b.source ?? 'api',
-  });
+    title: (b.title ?? '').trim() || null,
+    note: (b.text ?? '').trim() || null,
+    source: (b.source ?? '').trim() || 'api',
+  };
+
+  await insertBookmark(normalized);
 
   return new Response(null, { status: 204 });
-}

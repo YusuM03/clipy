@@ -19,7 +19,7 @@ export default async function Page() {
               rel="noopener noreferrer"
               className="text-sky-400 underline break-all"
             >
-              {row.title ?? row.url}
+              {row.title?.trim() || row.url}
             </a>
 
             {row.note && <p className="text-lg">{row.note}</p>}
